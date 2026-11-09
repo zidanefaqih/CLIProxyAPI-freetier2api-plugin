@@ -1157,7 +1157,11 @@ func (v *adapter) claimPlan(ctx context.Context, cred *Credential, req core.Clai
 			"zcode_claim_canceled", "领取已取消（等待下一次可提交时间时中断）", http.StatusRequestTimeout)
 	}
 
-	headers := map[string]string{CaptchaHeader: strings.TrimSpace(req.VerifyParam)}
+	headers := map[string]string{
+		CaptchaHeader: strings.TrimSpace(req.VerifyParam),
+		"X-ZCode-App-Version": ClaimAppVersion,
+		"User-Agent":          "ZCode/" + ClaimAppVersion,
+	}
 	if region := strings.TrimSpace(req.VerifyRegion); region != "" {
 		headers[CaptchaRegionHeader] = region
 	}
