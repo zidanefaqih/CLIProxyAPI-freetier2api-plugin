@@ -1268,6 +1268,12 @@ const (
 	// 同步改这里。
 	ClientAppVersion = "3.16.3"
 
+	// ClaimAppVersion is used only on the campaign path (billing/preview +
+	// marketing/touch). Some campaigns (e.g. ZCODE GLOBAL BUILD) are only
+	// offered to desktop 3.17.2; chat keeps ClientAppVersion so the identity
+	// asset / 3012 gate is not disturbed.
+	ClaimAppVersion = "3.17.2"
+
 	// UserAgent 与 ClientAppVersion 同源，避免两者漂移。
 	UserAgent = "ZCode/" + ClientAppVersion
 

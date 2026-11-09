@@ -1473,6 +1473,10 @@ const marketingTimeout = 10 * time.Second
 func marketingHeaders(cred *Credential) map[string]string {
 	headers := upstreamAuthHeaders(cred)
 	headers["Accept"] = "application/json"
+	// Campaign offers are gated on a newer desktop version; do not reuse
+	// ClientAppVersion here or marketing/touch returns an empty list.
+	headers["X-ZCode-App-Version"] = ClaimAppVersion
+	headers["User-Agent"] = "ZCode/" + ClaimAppVersion
 	return headers
 }
 
